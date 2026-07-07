@@ -1,493 +1,475 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daños por lluvias tormenta Leonardo – Atarfe, Granada</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b1120;
-      color: #e2e8f0;
-      line-height: 1.6;
-    }
-    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Vacacional: Vera y Alrededores</title>
+    <style>
+        :root {
+            --primary: #0077b6;
+            --secondary: #00b4d8;
+            --accent: #f77f00;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --card-bg: #ffffff;
+            --radius: 12px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
 
-    /* Hero */
-    .hero {
-      background: linear-gradient(135deg, #020617 0%, #0f2740 50%, #0f3b5e 100%);
-      color: #fff;
-      padding: 64px 0 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff08' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,213.3C672,224,768,224,864,202.7C960,181,1056,139,1152,133.3C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'/%3E%3C/svg%3E") no-repeat bottom / cover;
-      opacity: 0.15;
-      pointer-events: none;
-    }
-    .hero .container { position: relative; z-index: 1; }
-    .hero h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .hero .sub { font-size: 1.1rem; color: #94a3b8; margin-bottom: 4px; }
-    .hero .location { font-size: 0.95rem; color: #60a5fa; display: flex; align-items: center; gap: 6px; }
-    .hero .location svg { width: 16px; height: 16px; fill: #60a5fa; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* Stats bar */
-    .stats {
-      background: #0d1425;
-      border-bottom: 1px solid #1e293b;
-      padding: 24px 0;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 16px;
-    }
-    .stat-card {
-      text-align: center;
-      padding: 12px 8px;
-    }
-    .stat-card .num {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      line-height: 1.2;
-    }
-    .stat-card .label {
-      font-size: 0.8rem;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
+        body {
+            font-family: var(--font);
+            background-color: #f0f4f8;
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-    /* Sections */
-    section { padding: 56px 0; }
-    section:nth-child(odd) { background: #0d1425; }
-    section:nth-child(even) { background: #0b1120; }
-    section h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    section h2 .icon { font-size: 1.3rem; }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            position: relative;
+        }
 
-    /* Timeline */
-    .timeline-wrapper {
-      position: relative;
-      padding-left: 32px;
-    }
-    .timeline-wrapper::before {
-      content: '';
-      position: absolute;
-      left: 11px;
-      top: 4px;
-      bottom: 4px;
-      width: 3px;
-      background: #1e293b;
-      border-radius: 2px;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 28px;
-      padding-left: 20px;
-    }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -29px;
-      top: 6px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #3b82f6;
-      border: 3px solid #0b1120;
-      box-shadow: 0 0 0 2px #3b82f6;
-    }
-    .timeline-item.warning::before { background: #f59e0b; box-shadow: 0 0 0 2px #f59e0b; }
-    .timeline-item.danger::before { background: #ef4444; box-shadow: 0 0 0 2px #ef4444; }
-    .timeline-item.success::before { background: #10b981; box-shadow: 0 0 0 2px #10b981; }
-    .timeline-item .date {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 2px;
-    }
-    .timeline-item .title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .timeline-item .desc {
-      font-size: 0.92rem;
-      color: #94a3b8;
-    }
-    .timeline-item .badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 6px;
-    }
-    .badge-blue { background: #1e3a5f; color: #93c5fd; }
-    .badge-red { background: #3b1a1a; color: #fca5a5; }
-    .badge-amber { background: #3b2f1a; color: #fcd34d; }
-    .badge-green { background: #1a3b2a; color: #6ee7b7; }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
 
-    /* Cards */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #0f1a2e;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-      border: 1px solid #1e293b;
-    }
-    .card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #f1f5f9;
-    }
-    .card p, .card li {
-      font-size: 0.9rem;
-      color: #94a3b8;
-    }
-    .card ul { padding-left: 18px; }
-    .card ul li { margin-bottom: 4px; }
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
 
-    /* Data table */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-    .data-table th {
-      text-align: left;
-      font-weight: 600;
-      color: #64748b;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 8px 12px 8px 0;
-      border-bottom: 2px solid #1e293b;
-    }
-    .data-table td {
-      padding: 10px 12px 10px 0;
-      border-bottom: 1px solid #1a2538;
-      vertical-align: top;
-    }
-    .data-table tr:last-child td { border-bottom: none; }
-    .data-table td:first-child { font-weight: 600; white-space: nowrap; color: #e2e8f0; }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
 
-    /* Sources */
-    .source-list { list-style: none; }
-    .source-list li {
-      margin-bottom: 10px;
-      font-size: 0.85rem;
-    }
-    .source-list a {
-      color: #60a5fa;
-      word-break: break-all;
-    }
-    .source-list a:hover { text-decoration: underline; }
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
 
-    /* Footer */
-    footer {
-      background: #020617;
-      color: #64748b;
-      padding: 32px 0;
-      font-size: 0.85rem;
-      text-align: center;
-    }
+        .tab-btn {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            background: none;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
 
-    /* print */
-    @media print {
-      body { background: #fff; color: #000; }
-      .hero { background: #0f172a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .timeline-item::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      section:nth-child(odd), section:nth-child(even) { background: #fff !important; }
-      .card { background: #fff !important; border-color: #ddd !important; }
-      .card p, .card li { color: #333 !important; }
-      .data-table td:first-child { color: #000 !important; }
-    }
-    @media (max-width: 640px) {
-      .hero h1 { font-size: 1.6rem; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+        .tab-btn:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Quick Info Header inside Tabs */
+        .section-intro {
+            background-color: #e2eafc;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid var(--primary);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            border-top: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card.free { border-top-color: #2a9d8f; }
+        .card.cheap { border-top-color: #e9c46a; }
+        .card.premium { border-top-color: var(--accent); }
+        .card.utility { border-top-color: #6c757d; }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .badge.free { background-color: #e8f5e9; color: #2e7d32; }
+        .badge.cheap { background-color: #fff8e1; color: #f57f17; }
+        .badge.premium { background-color: #fbe9e7; color: #d84315; }
+        .badge.utility { background-color: #f5f5f5; color: #616161; }
+
+        .card-body p {
+            font-size: 0.95rem;
+            color: #4a4e69;
+            margin-bottom: 1rem;
+        }
+
+        .family-note {
+            background-color: #f1faee;
+            border-radius: 6px;
+            padding: 0.6rem;
+            font-size: 0.85rem;
+            color: #1d3557;
+            margin-bottom: 1rem;
+            border-left: 3px solid #457b9d;
+        }
+
+        .card-footer {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6c757d;
+            border-top: 1px solid #edf2f7;
+            padding-top: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .distance {
+            color: var(--primary);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Hero -->
-<header class="hero">
-  <div class="container">
-    <h1>Daños por lluvias torrenciales</h1>
-    <p class="sub">Borrasca Leonardo · Febrero 2026</p>
-    <p class="location">
-      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      Atarfe, Granada · Vivienda unifamiliar
-    </p>
-  </div>
-</header>
+    <header>
+        <h1>Vera en Familia 🌴</h1>
+        <p>Tu guía personalizada desde el Hotel Playazimbali</p>
+    </header>
 
-<!-- Stats -->
-<section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="num">158 L/m²</div><div class="label">Lluvia en feb 2026</div></div>
-      <div class="stat-card"><div class="num">65,8 L/m²</div><div class="label">Récord en 1 día (4-feb)</div></div>
-      <div class="stat-card"><div class="num">50 años</div><div class="label">Febrero más lluvioso desde 1972</div></div>
-      <div class="stat-card"><div class="num">11.000+</div><div class="label">Desalojados en Andalucía</div></div>
-      <div class="stat-card"><div class="num">10,3 M€</div><div class="label">Ayudas a Atarfe (22-jun-2026)</div></div>
-    </div>
-  </div>
-</section>
+    <div class="container">
+        <!-- Pestañas de Navegación -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab(event, 'gratuitos')">🍃 Gratis</button>
+            <button class="tab-btn" onclick="switchTab(event, 'economicos')">🪙 Económicos</button>
+            <button class="tab-btn" onclick="switchTab(event, 'premium')">💎 Premium</button>
+            <button class="tab-btn" onclick="switchTab(event, 'servicios')">🏪 Servicios</button>
+        </nav>
 
-<!-- Timeline -->
-<section>
-  <div class="container">
-    <h2><span class="icon">📅</span> Línea del tiempo</h2>
-    <div class="timeline-wrapper">
+        <!-- PESTAÑA: PLANES GRATUITOS -->
+        <div id="gratuitos" class="tab-content active">
+            <div class="section-intro">
+                Planes perfectos para disfrutar sin gastar nada y con total accesibilidad para el cochecito del bebé.
+            </div>
+            <div class="grid">
+                <div class="card free">
+                    <div class="card-header">
+                        <h3 class="card-title">Programa Expláyate</h3>
+                        <span class="badge free">Gratis</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Actividades infantiles diarias en la misma playa de Vera organizadas por el Ayuntamiento. Juegos de agua y dinámicas ideales para la niña de 8 años.</p>
+                        <div class="family-note">💡 Ideal: Mientras la mayor juega con los monitores, vosotros descansáis con el bebé a la sombra.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Playas de Vera</span>
+                        <span class="distance">A pie de playa</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item success">
-        <span class="badge badge-green">Hecho</span>
-        <div class="date">Diciembre 2025</div>
-        <div class="title">Compra de la vivienda</div>
-        <div class="desc">Adquirimos la casa en Atarfe. El tejado y la estructura estaban en buen estado, revisado antes de la compra.</div>
-      </div>
+                <div class="card free">
+                    <div class="card-header">
+                        <h3 class="card-title">Paseo Marítimo y Puerto de Garrucha</h3>
+                        <span class="badge free">Gratis</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Un paseo marítimo larguísimo, completamente llano y animado que conecta con el puerto pesquero. Ideal para ver la subasta de pescado si vais a última hora de la tarde.</p>
+                        <div class="family-note">💡 Carrito: Suelo impecable para pasear al bebé y muchos bancos a la sombra con vistas al mar.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Garrucha</span>
+                        <span class="distance">~4 km (5 min coche)</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item warning">
-        <span class="badge badge-amber">Inicio lluvias</span>
-        <div class="date">Finales de enero 2026</div>
-        <div class="title">Comienzan las lluvias intensas</div>
-        <div class="desc">Entra en vigor el Plan de Emergencias en Andalucía. Empiezan las precipitaciones que no cesarán durante semanas.</div>
-      </div>
+                <div class="card free">
+                    <div class="card-header">
+                        <h3 class="card-title">Parque de las Familias (Garrucha)</h3>
+                        <span class="badge free">Gratis</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Gran parque infantil público con zonas de juego tematizadas, toboganes y columpios adaptados a diferentes edades.</p>
+                        <div class="family-note">💡 Recomendado: Perfecto para ir al caer la tarde. La mayor juega segura mientras el bebé descansa en un entorno espacioso.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Entrada de Garrucha</span>
+                        <span class="distance">~5 km (6 min coche)</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item danger">
-        <span class="badge badge-red">Máximo histórico</span>
-        <div class="date">2 – 13 de febrero 2026</div>
-        <div class="title">Borrasca Leonardo: llueve TODOS los días</div>
-        <div class="desc">Entre el 2 y el 13 de febrero no dejó de llover. El día 4 se batió el récord histórico: 65,8 L/m² en 24 horas. En todo el mes cayeron 158 L/m², el febrero más lluvioso desde 1972.</div>
-      </div>
+                <div class="card free">
+                    <div class="card-header">
+                        <h3 class="card-title">Laguna de Puerto Rey</h3>
+                        <span class="badge free">Gratis</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Espacio natural protegido en la desembocadura del río Antas donde se concentran aves acuáticas. Paseo de madera perfectamente plano.</p>
+                        <div class="family-note">💡 Consejo: Lleva unos prismáticos sencillos; a tu hija de 8 años le encantará avistar patos y garzas.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Las Marinas / Puerto Rey</span>
+                        <span class="distance">~1.2 km (Paseo llano)</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item danger">
-        <span class="badge badge-red">Ausencia forzada</span>
-        <div class="date">Principios de febrero 2026</div>
-        <div class="title">Hospital por el nacimiento de nuestra hija</div>
-        <div class="desc">Durante los días de la tormenta estábamos en el hospital. No pudimos estar presentes en la casa para prevenir daños, achicar agua ni proteger los muebles.</div>
-      </div>
+                <div class="card free">
+                    <div class="card-header">
+                        <h3 class="card-title">Casco Histórico de Vera</h3>
+                        <span class="badge free">Gratis</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Ruta urbana tranquila. Destaca la Iglesia-Fortaleza de la Encarnación (diseñada contra ataques piratas) y la histórica Fuente de los Cuatro Caños.</p>
+                        <div class="family-note">💡 Carrito: Calles peatonales cómodas, aunque requiere moverse un poco en coche hasta el pueblo.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Vera Pueblo</span>
+                        <span class="distance">~7 km (En coche)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <div class="timeline-item danger">
-        <span class="badge badge-red">Destrozo</span>
-        <div class="date">Mediados de febrero 2026</div>
-        <div class="title">Regreso a casa: daños graves</div>
-        <div class="desc">Al volver del hospital encontramos: hundimiento parcial del tejado, techo interno derrumbado (dejando ver el cañizo), paredes con manchas de humedad, mobiliario de la planta superior (cuna, cómoda, muebles) empapado e hinchado por el agua. Perdimos casi todos los muebles. No teníamos facturas porque eran muebles de nuestra vivienda anterior.</div>
-      </div>
+        <!-- PESTAÑA: PLANES ECONÓMICOS -->
+        <div id="economicos" class="tab-content">
+            <div class="section-intro">
+                Opciones divertidas que cuestan muy poco, no requieren largos viajes y garantizan entretenimiento local.
+            </div>
+            <div class="grid">
+                <div class="card cheap">
+                    <div class="card-header">
+                        <h3 class="card-title">El Tren Turístico</h3>
+                        <span class="badge cheap">Económico</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Clásico tren sobre ruedas que recorre toda la línea costera desde la zona norte de Vera hasta el puerto de Garrucha.</p>
+                        <div class="family-note">💡 Ventaja: Una atracción divertida en sí misma para los niños y os ahorra mover vuestro coche.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Parada cerca del hotel</span>
+                        <span class="distance">Pasa por el paseo</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item danger">
-        <span class="badge badge-red">Siniestro</span>
-        <div class="date">Febrero 2026</div>
-        <div class="title">Apertura del siniestro con el seguro</div>
-        <div class="desc">Nada más ver los daños, abrimos el parte con nuestra aseguradora. La aseguradora nos indica que busquemos presupuestos de reparación. Nos ponemos a buscar inmediatamente, viendo el panorama tan malo que hay con las empresas.</div>
-      </div>
+                <div class="card cheap">
+                    <div class="card-header">
+                        <h3 class="card-title">Karting Garrucha (Infantil)</h3>
+                        <span class="badge cheap">Precio Medio</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Pista de karts muy cercana que cuenta con vehículos específicos para niños pequeños y karts biplaza por si un adulto quiere acompañar a la mayor.</p>
+                        <div class="family-note">💡 Diversión: Un subidón de adrenalina muy controlado y seguro para la niña de 8 años.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Ctra. Garrucha-Vera</span>
+                        <span class="distance">~3.5 km (4 min coche)</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item warning">
-        <span class="badge badge-amber">Emergencia</span>
-        <div class="date">Febrero – marzo 2026</div>
-        <div class="title">Medidas provisionales</div>
-        <div class="desc">Desalojamos la planta superior. Bajamos todo lo que pudimos. Nos hemos instalado en la parte de abajo como hemos podido. Solo usamos el baño de arriba porque tiene bañera (el baño de abajo no tiene ducha).</div>
-      </div>
+                <div class="card cheap">
+                    <div class="card-header">
+                        <h3 class="card-title">Cine de Verano</h3>
+                        <span class="badge cheap">Económico</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Proyecciones nocturnas de cine familiar e infantil al aire libre bajo las estrellas durante la temporada estival.</p>
+                        <div class="family-note">💡 Nota: Es un plan fresco para la noche cuando bajan las temperaturas de la playa.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Recintos Vera Playa</span>
+                        <span class="distance">Muy cerca en coche</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item warning">
-        <span class="badge badge-amber">Búsqueda</span>
-        <div class="date">Febrero – mayo 2026</div>
-        <div class="title">Buscamos presupuesto sin éxito</div>
-        <div class="desc">Desde que la aseguradora nos dijo que buscáramos presupuestos, empezamos a contactar empresas. Llamamos una y otra vez a GIA, Raúl Rivera Construcciones, Reformas Caribe y muchas más. La mayoría ni siquiera nos contestaron. Las pocas que respondieron nos dijeron que estaban completamente saturadas y no podían asumir más obras. El sector de la construcción en Granada estaba colapsado por la demanda masiva tras las lluvias históricas.</div>
-      </div>
+                <div class="card cheap">
+                    <div class="card-header">
+                        <h3 class="card-title">Feria Infantil Vera Park</h3>
+                        <span class="badge cheap">Moderar Gasto</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Pequeño parque de atracciones mecánicas temporales en verano. El acceso al recinto es libre, pagas por cada viaje de la niña.</p>
+                        <div class="family-note">💡 Truco: Pide cupones de descuento (2x1) en los comercios locales de la zona.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Av. Ciudad de Valencia</span>
+                        <span class="distance">~1.5 km</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <div class="timeline-item success">
-        <span class="badge badge-green">Presupuesto</span>
-        <div class="date">Principios de junio 2026</div>
-        <div class="title">Primer presupuesto real: Aquí Tu Reforma</div>
-        <div class="desc">Casi 4 meses después del siniestro, <strong>Aquí Tu Reforma</strong> fue la única empresa que nos dio un presupuesto en condiciones. El resto o no contestó o seguía sin poder atender nuevos proyectos. Hasta entonces no hemos tenido un presupuesto que presentar al seguro.</div>
-      </div>
+        <!-- PESTAÑA: PLANES PREMIUM -->
+        <div id="premium" class="tab-content">
+            <div class="section-intro">
+                Experiencias de pago de primer nivel que justifican su precio para pasar un día inolvidable.
+            </div>
+            <div class="grid">
+                <div class="card premium">
+                    <div class="card-header">
+                        <h3 class="card-title">Parque Acuático AquaVera</h3>
+                        <span class="badge premium">Merece la pena</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Parque de agua idóneo. Cuenta con zonas de chapoteo seguro con agua templada para bebés y grandes toboganes de adrenalina para la mayor.</p>
+                        <div class="family-note">💡 Logística: Al estar al lado, podéis volver al hotel cómodamente si el bebé se cansa demasiado.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Av. Ciudad de Valencia</span>
+                        <span class="distance">~1.6 km (Muy cerca)</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item warning">
-        <span class="badge badge-amber">Instituciones</span>
-        <div class="date">Junio 2026</div>
-        <div class="title">Sin ayudas disponibles</div>
-        <div class="desc">Hemos preguntado en Servicios Sociales, en la Junta de Andalucía y en Urbanismo del Ayuntamiento de Atarfe. En todos nos informan de que no hay ayudas ni convocatorias abiertas para daños en viviendas particulares.</div>
-      </div>
+                <div class="card premium">
+                    <div class="card-header">
+                        <h3 class="card-title">Oasys MiniHollywood</h3>
+                        <span class="badge premium">Día Completo</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Parque temático del lejano oeste con espectáculos en vivo, una gran reserva zoológica con animales y complejo de piscinas.</p>
+                        <div class="family-note">💡 Gestión: Apto para carritos, aunque hay zonas de tierra. Llevad sombrilla para el carro del bebé.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Desierto de Tabernas</span>
+                        <span class="distance">~55 min (En coche)</span>
+                    </div>
+                </div>
 
-      <div class="timeline-item danger">
-        <span class="badge badge-red">Actualidad</span>
-        <div class="date">Junio 2026 – presente</div>
-        <div class="title">Visita del seguro mañana</div>
-        <div class="desc">Seguimos viviendo en la planta baja. El tejado y el techo hundido siguen sin reparar. Mañana viene el seguro a evaluar los daños.</div>
-      </div>
+                <div class="card premium">
+                    <div class="card-header">
+                        <h3 class="card-title">Geoda Gigante de Pulpí</h3>
+                        <span class="badge premium">Espectacular</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Una joya de la geología mundial. Formaciones de cristales transparentes gigantes dentro de una antigua mina recuperada.</p>
+                        <div class="family-note">⚠️ Restricción: Edad mínima 5 años. La mayor sí entra; os sugerimos turnaros con el bebé.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Lugar: Pilar de Jaravía</span>
+                        <span class="distance">~30 min (En coche)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-  </div>
-</section>
+        <!-- PESTAÑA: SERVICIOS Y LOGÍSTICA -->
+        <div id="servicios" class="tab-content">
+            <div class="section-intro">
+                Supermercados y farmacias indispensables para cubrir cualquier necesidad del bebé o imprevistos de última hora.
+            </div>
+            <div class="grid">
+                <div class="card utility">
+                    <div class="card-header">
+                        <h3 class="card-title">Supermercado SPAR</h3>
+                        <span class="badge utility">Alimentación</span>
+                    </div>
+                    <div class="card-body">
+                        <p>El punto de suministro express más cercano al hotel. Abre de lunes a domingo. Ideal para hielo, agua, fruta y compras rápidas.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>Av. Descubrimiento</span>
+                        <span class="distance">~500 m (A pie)</span>
+                    </div>
+                </div>
 
-<!-- Damage details -->
-<section>
-  <div class="container">
-    <h2><span class="icon">🏠</span> Daños en la vivienda</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>🧱 Tejado y estructura</h3>
-        <ul>
-          <li>Hundimiento parcial del tejado en varias zonas</li>
-          <li>Techo interior derrumbado, dejando al descubierto el cañizo</li>
-          <li>Deterioro acelerado por las lluvias persistentes (12 días seguidos)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>💧 Humedades y paredes</h3>
-        <ul>
-          <li>Manchas de humedad generalizadas en paredes de la planta superior</li>
-          <li>Filtraciones desde el tejado a las habitaciones</li>
-          <li>Riesgo estructural en algunas zonas</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>🪑 Mobiliario perdido</h3>
-        <ul>
-          <li>Cuna de la bebé</li>
-          <li>Cómoda y armarios</li>
-          <li>Muebles varios empapados e hinchados por el agua</li>
-          <li>Sin facturas: eran muebles de nuestra vivienda anterior</li>
-          <li>Solo pudimos salvar un par de objetos</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>🚿 Situación actual</h3>
-        <ul>
-          <li>Vivimos hacinados en la planta baja</li>
-          <li>Subimos solo a bañarnos (única bañera disponible)</li>
-          <li>El baño de abajo no tiene ducha</li>
-          <li>Convivencia difícil con un bebé recién nacido</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+                <div class="card utility">
+                    <div class="card-header">
+                        <h3 class="card-title">Consum / Mercadona</h3>
+                        <span class="badge utility">Gran Compra</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Supermercados de grandes dimensiones perfectos para una compra completa de pañales, potitos y despensa de vacaciones. Cierran domingos.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>Vera Playa</span>
+                        <span class="distance">~1.5 - 2 km (3 min coche)</span>
+                    </div>
+                </div>
 
-<!-- Contexto meteorológico -->
-<section>
-  <div class="container">
-    <h2><span class="icon">🌧️</span> Contexto meteorológico real</h2>
-    <table class="data-table">
-      <tr><th>Dato</th><th>Valor</th><th>Fuente</th></tr>
-      <tr><td>Febrero 2026</td><td>158 L/m² en el Aeropuerto de Granada</td><td>AEMET</td></tr>
-      <tr><td>Récord diario (4-feb)</td><td>65,8 L/m² en 24h — superó los 35,3 L/m² de 1992</td><td>AEMET</td></tr>
-      <tr><td>Días de lluvia</td><td>12 días consecutivos (2 al 13 de febrero)</td><td>AEMET / Ahora Granada</td></tr>
-      <tr><td>Acumulado ene-feb</td><td>~291 L/m² (~75% de la media anual en 60 días)</td><td>AEMET</td></tr>
-      <tr><td>Borrasca Leonardo</td><td>11.000+ desalojados, 13.700 incidencias en Andalucía</td><td>Junta de Andalucía / 112</td></tr>
-      <tr><td>Atarfe afectado</td><td>Carreteras cortadas GR-3412 y A-323, 10,3 M€ en ayudas del Gobierno</td><td>Granada Hoy / Gobierno de España</td></tr>
-      <tr><td>Viznar (cerca)</td><td>106,8 L/m² el 4 de febrero — máxima provincial</td><td>AEMET</td></tr>
-      <tr><td>Declaración zona catastrófica</td><td>BOJA decreto-ley 1/2026 (25-feb-2026)</td><td>BOJA / Junta de Andalucía</td></tr>
-    </table>
-  </div>
-</section>
-
-<!-- Empresas contactadas -->
-<section>
-  <div class="container">
-    <h2><span class="icon">📋</span> Empresas contactadas</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>❌ GIA</h3>
-        <p>Contactados. Sin disponibilidad para presupuestar por saturación de trabajo tras las lluvias.</p>
-      </div>
-      <div class="card">
-        <h3>❌ Raúl Rivera Construcciones</h3>
-        <p>Contactados. Sin disponibilidad para nuevas obras.</p>
-      </div>
-      <div class="card">
-        <h3>❌ Reformas Caribe</h3>
-        <p>Contactados. No pudieron asumir el proyecto.</p>
-      </div>
-      <div class="card" style="border-color: #10b981; border-width: 2px;">
-        <h3>✅ Aquí Tu Reforma</h3>
-        <p><strong>Única empresa que nos dio un presupuesto real</strong> a principios de junio de 2026 — casi 4 meses después del siniestro. Profesionales y con disponibilidad.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Instituciones -->
-<section>
-  <div class="container">
-    <h2><span class="icon">🏛️</span> Instituciones consultadas</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Servicios Sociales</h3>
-        <p>Nos informaron de que no hay ayudas disponibles para daños en viviendas particulares por las lluvias.</p>
-      </div>
-      <div class="card">
-        <h3>Junta de Andalucía</h3>
-        <p>Consultados. Sin convocatorias abiertas para particulares. Las ayudas del Plan Andalucía Actúa se centran en infraestructuras públicas.</p>
-      </div>
-      <div class="card">
-        <h3>Urbanismo de Atarfe</h3>
-        <p>En el Ayuntamiento nos confirmaron que no hay subvenciones municipales activas para este tipo de daños.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Fuentes -->
-<section>
-  <div class="container">
-    <h2><span class="icon">📰</span> Fuentes y referencias</h2>
-    <ul class="source-list">
-      <li>📄 <a href="https://www.ahoragranada.com/noticias/granada-registra-el-febrero-mas-lluvioso-en-al-menos-medio-siglo-con-158-litros/" target="_blank">Granada registra el febrero más lluvioso en al menos medio siglo, con 158 litros — Ahora Granada (1-mar-2026)</a></li>
-      <li>📄 <a href="https://www.granadahoy.com/granada/borrasca-leonardo-granada-problemas-lluvias-viento-desalojo-rio-embalse-crecidas_0_2005819689.html" target="_blank">Leonardo desborda Granada: 167 incidencias, ríos en niveles históricos — Granada Hoy (5-feb-2026)</a></li>
-      <li>📄 <a href="https://elpais.com/espana/2026-02-06/ultima-hora-de-la-borrasca-leonardo-en-directo.html" target="_blank">Borrasca Leonardo: 11.000 desalojados en Andalucía — El País (6-feb-2026)</a></li>
-      <li>📄 <a href="https://www.granadahoy.com/granada/borrasca-leonardo-granada-lluvia-viento-inundacion-incidencias-carretera-trafico-rio_0_2005810065.html" target="_blank">Leonardo inunda Granada: carreteras cortadas en Atarfe — Granada Hoy (4-feb-2026)</a></li>
-      <li>📄 <a href="https://www.elindependientedegranada.es/ciudadania/con-solo-mitad-mes-febrero-ya-es-mas-lluvioso-granada-mas-50-anos" target="_blank">Febrero ya es el más lluvioso en Granada en más de 50 años — El Independiente (15-feb-2026)</a></li>
-      <li>📄 <a href="https://www.granadahoy.com/provincia/atarfe-obtiene-10-millones-euros-gobierno-reparar-danos-prevenir-inundaciones_0_2007148473.html" target="_blank">Atarfe obtiene 10,3 M€ del Gobierno para reparar daños — Granada Hoy (22-jun-2026)</a></li>
-      <li>📄 <a href="https://www.rtve.es/noticias/20260207/temporal-lluvia-viento-resumen-7-febrero/16927762.shtml" target="_blank">Resumen temporal 7-febrero: 11.000 desalojados — RTVE (7-feb-2026)</a></li>
-      <li>📄 <a href="https://www.rtve.es/noticias/20260209/andalucia-alerta-naranja-lluvias-va-volviendo-normalidad-temporal/16929347.shtml" target="_blank">Andalucía vuelve a la normalidad — RTVE (9-feb-2026)</a></li>
-      <li>📄 <a href="https://www.cope.es/emisoras/andalucia/granada-provincia/granada/noticias/temporal-aisla-decenas-personas-deja-herido-granada-20260206_3302404.html" target="_blank">El temporal aísla a decenas de personas en Granada — COPE (6-feb-2026)</a></li>
-      <li>📄 <a href="https://www.granadahoy.com/granada/inundaciones-granada-satelite-copernicus-3641-hectareas-bajo-agua-borrascas_0_2005888221.html" target="_blank">3.641 hectáreas inundadas en Granada — satélite Copernicus — Granada Hoy (13-feb-2026)</a></li>
-      <li>📄 BOJA Decreto-ley 1/2026 (25-feb-2026) — Medidas urgentes por daños de borrascas en Andalucía</li>
-      <li>📄 <a href="https://www.infobae.com/espana/agencias/2026/02/16/la-junta-activa-este-martes-el-plan-andalucia-actua-para-reparar-los-danos-del-temporal/" target="_blank">Junta activa Plan Andalucía Actúa — Infobae (16-feb-2026)</a></li>
-    </ul>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>Documentación elaborada para la visita del seguro — Junio 2026</p>
-    <p style="margin-top:4px;font-size:0.75rem;">Toda la información meteorológica está contrastada con datos públicos de AEMET, BOJA y fuentes periodísticas.</p>
-  </div>
-</footer>
-
-</body>
-</html>
+                <div class="card utility">
+                    <div class="card-header">
+                        <h3 class="card-title">Farmacia J.M. Soler</h3>
+                        <span class="badge utility">Salud / Bebé</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Farmacia principal de la zona costera. Perfectamente provista de productos de nutrición i
